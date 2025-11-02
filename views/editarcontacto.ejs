@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= titulo %></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item"><a href="/" class="nav-link">DIRECTORIO</a></li>
+        <li class="nav-item"><a href="/crear" class="nav-link">CREAR CONTACTO</a></li>
+        <li class="nav-item"><a href="#" class="nav-link active">EDITAR CONTACTO</a></li>
+    </ul>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Editar Contacto</h3>
+        </div>
+
+        <div class="card-body">
+            <form action="/api/contactos/editar/<%= contacto.id_contacto %>" method="POST">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Primer nombre</label>
+                        <input type="text" name="primer_nombre" value="<%= contacto.primer_nombre %>" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Segundo nombre</label>
+                        <input type="text" name="segundo_nombre" value="<%= contacto.segundo_nombre %>" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Primer apellido</label>
+                        <input type="text" name="primer_apellido" value="<%= contacto.primer_apellido %>" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Segundo apellido</label>
+                        <input type="text" name="segundo_apellido" value="<%= contacto.segundo_apellido %>" class="form-control">
+                    </div>
+
+                    <!-- ✅ Campo Género -->
+                    <div class="col-md-6">
+                        <label class="form-label">Género</label>
+                        <select name="id_genero" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <% generos.forEach(g => { %>
+                                <option value="<%= g.id_genero %>" 
+                                    <%= contacto.id_genero === g.id_genero ? 'selected' : '' %>>
+                                    <%= g.detalle_genero %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <!-- ✅ Campo Dirección (Barrio) -->
+                    <div class="col-md-6">
+                        <label class="form-label">Barrio / Dirección</label>
+                        <select name="id_direccion" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <% direcciones.forEach(d => { %>
+                                <option value="<%= d.id_direccion %>"
+                                    <%= contacto.id_direccion === d.id_direccion ? 'selected' : '' %>>
+                                    <%= d.detalle_direccion %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <!-- ✅ Campo Tipo de teléfono -->
+                    <div class="col-md-6">
+                        <label class="form-label">Tipo de teléfono</label>
+                        <select name="id_tipo_telefono" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <% tiposTelefono.forEach(t => { %>
+                                <option value="<%= t.id_tipo_telefono %>"
+                                    <%= contacto.id_tipo_telefono === t.id_tipo_telefono ? 'selected' : '' %>>
+                                    <%= t.detalle_tipo_telefono %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" value="<%= contacto.email %>" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" name="telefono" value="<%= contacto.telefono %>" class="form-control">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4 gap-2">
+                    <a href="/" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

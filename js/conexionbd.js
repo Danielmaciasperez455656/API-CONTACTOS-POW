@@ -4,9 +4,9 @@ const mysql = require("mysql2");
 // 1. Configura la conexión
 let conexion = mysql.createConnection({
     host: "localhost",
-    database: "contactos",
+    database: "api_pow",
     user: "root",
-    password: "a12345678.", // Asegúrate de que esta sea tu contraseña
+    password: "Leo@2110", // Asegúrate de que esta sea tu contraseña
 });
 
 // 2. Conecta a la base de datos
