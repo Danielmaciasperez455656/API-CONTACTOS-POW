@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= titulo %></title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -21,7 +22,7 @@
         </div>
 
         <div class="card-body">
-            <form action="/api/contactos/editar/<%= contacto.id_contacto %>" method="POST">
+            <form action="/api/contactos/editar/<%= contacto.id_contacto %>" method="POST" id="formEditar">
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label">Primer nombre</label>
@@ -41,7 +42,6 @@
                         <input type="text" name="segundo_apellido" value="<%= contacto.segundo_apellido %>" class="form-control">
                     </div>
 
-                    <!-- Campo Género -->
                     <div class="col-md-6">
                         <label class="form-label">Género</label>
                         <select name="id_genero" class="form-select">
@@ -55,7 +55,6 @@
                         </select>
                     </div>
 
-                    <!-- Campo Dirección (Barrio) -->
                     <div class="col-md-6">
                         <label class="form-label">Barrio / Dirección</label>
                         <select name="id_direccion" class="form-select">
@@ -69,7 +68,6 @@
                         </select>
                     </div>
 
-                    <!-- Campo Tipo de teléfono -->
                     <div class="col-md-6">
                         <label class="form-label">Tipo de teléfono</label>
                         <select name="id_tipo_telefono" class="form-select">
@@ -101,6 +99,30 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const formulario = document.getElementById('formEditar');
+
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault(); // Detenemos el envío automático
+
+            Swal.fire({
+                title: '¿Guardar cambios?',
+                text: "Se actualizará la información de este contacto.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#198754', // Verde éxito
+                cancelButtonColor: '#6c757d', // Gris secundario
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, enviamos el formulario manualmente
+                    formulario.submit();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
