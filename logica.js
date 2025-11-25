@@ -112,3 +112,6 @@ app.listen(puerto, () => {
     console.log("Sirviendo archivos estáticos desde:", path.join(__dirname, 'public'));
     console.log("Accede a la app en: http://localhost:3000/index.html");
 });
+
+
+/* comentarios que valen oro */
